@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.cindy.prj.notice.map.NoticeMapper">
+	<select id="noticeSelectList"
+		resultType="co.cindy.prj.notice.vo.NoticeVO">
+		select a.*, b.name       <!-- join 구문이다 -->
+		from notice a, member b
+		where a.writer = b.id
+	</select>
+
+	<select id="noticeSelect"
+		resultType="co.cindy.prj.notice.vo.NoticeVO">
+		select a.*, b.name
+		from notice a, member b
+		where a.writer =
+		b.id and a.id = #{id}
+	</select>
+
+	<insert id="noticeInsert"
+		parameterType="co.cindy.prj.notice.vo.NoticeVO">
+		insert into notice(id,writer,writeDate,title,contents)
+		values(#{id},#{writer},#{writerDate},#{title},#{contents})
+	</insert>
+
+	<update id="noticeUpdate"
+		parameterType="co.cindy.prj.notice.vo.NoticeVO">
+		update notice set contents = #{contents} where id =
+		#{id}
+	</update>
+
+	<delete id="noticeDelete">
+		delete from notice where id = #{id}
+	</delete>
+	
+</mapper>
